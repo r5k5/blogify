@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap Login &amp; Register Templates</title>
+        {% load static %}
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="{% static 'accounts/css/bootstrap.min.css' %}">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'accounts/css/form-elements.css' %}">
+        <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="{% static 'accounts/img/favicon.png' %}">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'accounts/img/apple-touch-icon-144-precomposed.png' %}">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'accounts/img/apple-touch-icon-114-precomposed.png' %}">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'accounts/img/apple-touch-icon-72-precomposed.png' %}">
+        <link rel="apple-touch-icon-precomposed" href="{% static 'accounts/img/apple-touch-icon-57-precomposed.png' %}">
+
+    </head>
+
+    <body>
+        
+        <div class="container">
+        <div class="col-sm-8 col-sm-offset-2">
+            <br/>
+            <h1><strong>{{ title }}</strong></h1>
+                <hr/><br/>
+                    
+                        <div class="form-top">
+                            <div class="form-top-left">
+                                <h3>{{ title }} to our site</h3>
+                                <p>Enter your details to {{ title }}:</p>
+                            </div>
+                            <div class="form-top-right">
+                                <i class="fa fa-lock"></i>
+                            </div>
+                        </div>
+                        <div class="form-bottom">
+                            <form role="form" action="" method="POST" enctype="multipart/form-data" class="login-form">
+                                <div class="form-group">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                </div>
+                                <p><button type="submit" class="btn">{{ title }}</button></p>
+                                {% if title == 'Sign In' %}
+                                    <p>Not a member ?
+                                    <a href="{% url 'accounts:register' %}" class="btn">Register</a>
+                                    </p>
+                                {% endif %}
+                                {% if title == 'Register' %}
+                                    <p>Already a member ?
+                                    <a href="{% url 'accounts:login' %}" class="btn">Sign In</a>
+                                    </p>
+                                {% endif %}
+                            </form>
+                        </div>
+                    <br/><br/>
+        </div>
+        </div>
+                        
+        <!-- Javascript -->
+        <script src="{% static 'accounts/js/jquery.min.js' %}"></script>
+        <script src="{% static 'accounts/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'accounts/js/jquery.backstretch.min.js' %}"></script>
+        <script src="{% static 'accounts/js/scripts.js' %}"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+
+
+    </body>
+
+</html>

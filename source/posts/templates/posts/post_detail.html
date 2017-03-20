@@ -1,0 +1,67 @@
+{% extends "posts/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Blog | {{ post.title }}{% endblock %}
+
+{% block header-image %}{{ post.image.url }}{% endblock %}
+
+{% block header-title %}{{ post.title }}{% endblock %}
+
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link page-scroll" href="{% url 'posts:update' post.id %}">Edit</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link page-scroll" href="{% url 'posts:delete' post.id %}">Delete</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link page-scroll" href="{% url 'posts:list' %}">Feed</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link page-scroll" href="#">Forum</a>
+    </li>
+{% endblock %}
+
+
+{% block heading %}
+	<div class="post-heading">
+	    <h1>{{ post.title }}</h1>
+	    <span class="meta">Posted by <a href="#">{% if post.user.get_full_name %}{{ post.user.get_full_name }}{% endif %}</a> on {{ post.timestamp }}</span>
+	</div>	
+{% endblock %}
+
+{% block content %}
+<article>
+    <div class="container">
+        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+        	<p>{{ post.content|safe }}</p>
+		</div>
+    </div>
+</article>
+<br/>
+<div class="container">
+    <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+        <h5>Comments</h5>
+        <form method="POST" action="" enctype="multipart/form-data">
+            <div class="control-group">
+                {% csrf_token %}
+                {{ comment_form }}<br/>                
+            </div>
+        </form>
+        {% for comment in comments %}
+            <blockquote class="blockquote">
+                <small style="color:black;">{{ comment.content }}</small><br/>
+                <small>Posted by {{ comment.user.get_full_name }}, {{ comment.timestamp|timesince }} ago</small>
+            </blockquote>
+        {% endfor %}
+        
+        {% if comments.has_previous %}
+            <a class="btn btn-primary" href="?page={{ comments.previous_page_number }}">New Comments</a>
+        {% endif %}
+        {% if comments.has_next %}
+            <a class="btn btn-danger" href="?page={{ comments.next_page_number }}">Old Comments</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

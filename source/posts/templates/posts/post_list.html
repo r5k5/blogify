@@ -1,0 +1,62 @@
+{% extends "posts/base.html" %}
+{% load staticfiles %}
+
+{% block title %}Feed{% endblock %}
+
+{% block header-image %}{% static 'posts/img/about-bg.jpg' %}{% endblock %}
+
+{% block navbar %}
+    <li class="nav-item">
+	   	<form method="GET" action=''>
+	        <div class="input-group">
+		      	<input type="text" name="q" class="form-control" placeholder="Search..." value="{{ request.GET.q }}"/>
+	    	</div>
+	    </form>
+    </li>
+    <li class="nav-item">
+		<a class="nav-link page-scroll" href="{% url 'posts:create' %}">Create</a>
+	</li>
+	<li class="nav-item">
+        <a class="nav-link page-scroll" href="#">Forum</a>
+    </li>
+{% endblock %}
+
+{% block heading %}
+	<div class="site-heading">
+	    <h1>Blogs</h1>
+	    <span class="meta">It's merely a tool that lets you do anything from change the world to share your shopping list.</span>
+	</div>	
+{% endblock %}
+
+<a href="{% url 'posts:create' %}" style="color: white;border: 3px solid white; padding: 5px">Create</a>
+
+{% block content %}
+
+<div class="container">
+<div class="row">
+<div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+
+	{% for post in object_list %}
+		<div class="post-preview">
+            <a href="{{ post.get_absolute_url }}">
+                <h2 class="post-title">
+                    {{ post.title }}
+                </h2>
+            </a>
+            <p class="post-meta">Posted by <a href="#">{% if post.user.get_full_name %}{{ post.user.get_full_name }}{% endif %}</a> on {{ post.timestamp }}</p>
+        </div>
+        <hr>
+	{% endfor %}
+
+	{% if object_list.has_previous %}
+	    <a class="btn btn-primary" href="?page={{ object_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q}}{%endif%}">New Posts</a>
+	{% endif %}
+	{% if object_list.has_next %}
+	    <a class="btn btn-danger" href="?page={{ object_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Old Posts</a>
+	{% endif %}
+
+</div>
+</div>
+</div>
+
+{% endblock %}
