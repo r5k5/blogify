@@ -1,0 +1,57 @@
+{% extends "posts/base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}detail{% endblock %}
+
+{% block header-image %}{% static 'forum/img/forms-header.jpg' %}{% endblock %}
+
+{% block heading %}
+	<div class="site-heading">
+    <h1>Find your answers here</h1>
+	</div>
+{% endblock %}
+
+{% block navbar %}
+  <li class="nav-item">
+      <a class="nav-link page-scroll" href="{% url 'forum:questionAdd'  %}">Ask</a>
+  </li>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>{{ question.question }}</h1>
+  <p class="head">Asked by {{ question.userID.username }} on {{ question.date }} </p>
+  <p><a href="{% url 'forum:answerAdd' question.id %}"><button class="btn btn-primary" > Answer This Question </button></a></p>
+  <hr>
+  <br>
+  <br> 
+</div>
+  <div class="container">
+  <div class="row">
+  <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">     
+  {% for ans in question.answer_set.all %}
+    <div class="answer">
+    <h3 class="answer">  <span class="fa fa-reply"></span>
+      {{ ans.answer }}</h3> <br>
+      <div class="answer-foot">
+        <a href="{% url 'forum:answerUpvote' ans.id %}">
+          <button class="btn btn-success" >
+            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Upvote <small>{{ans.upvotes}}</small>
+          </button>
+        </a>
+        <p class="user-detail">Answered by {{ ans.userID.username }} on {{ ans.date}}</p>
+        <hr class="short-separator">
+      </div>
+    </div>
+  {% endfor %}
+</div>
+</div>
+</div>
+
+<script>
+  $('li.active').removeClass('active');
+  $('#forum-tab').addClass('active');
+</script>
+
+{% endblock %}

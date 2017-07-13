@@ -8,25 +8,21 @@
 {% block header-title %}{{ post.title }}{% endblock %}
 
 {% block navbar %}
-    <li class="nav-item">
-        <a class="nav-link page-scroll" href="{% url 'posts:update' post.id %}">Edit</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link page-scroll" href="{% url 'posts:delete' post.id %}">Delete</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link page-scroll" href="{% url 'posts:list' %}">Feed</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link page-scroll" href="#">Forum</a>
-    </li>
+    {% if authenticated_user == post.user %}
+        <li class="nav-item">
+            <a class="nav-link page-scroll" href="{% url 'posts:update' post.id %}">Edit</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link page-scroll" href="{% url 'posts:delete' post.id %}">Delete</a>
+        </li>
+    {% endif %}
 {% endblock %}
 
 
 {% block heading %}
 	<div class="post-heading">
 	    <h1>{{ post.title }}</h1>
-	    <span class="meta">Posted by <a href="#">{% if post.user.get_full_name %}{{ post.user.get_full_name }}{% endif %}</a> on {{ post.timestamp }}</span>
+	    <span class="meta">Posted by <a href="#">{% if post.user.get_full_name %}{{ post.user.username }}{% endif %}</a> on {{ post.timestamp }}</span>
 	</div>	
 {% endblock %}
 

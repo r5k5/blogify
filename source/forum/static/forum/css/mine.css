@@ -1,0 +1,28 @@
+
+body{
+  padding-top: 50px;
+}
+
+#big-logo-bg,#we{
+  /*background-color: #829192;*/
+
+  background-image:url('forum/img/glass_board.png');
+}
+img{
+  display: block;
+  margin:auto;
+}
+#username{
+  /*float:right;*/
+  text-align: center;
+  color: white;
+
+}
+
+#footer-div{
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  background-color: #ECEFF1;
+  margin-bottom: 0;
+}

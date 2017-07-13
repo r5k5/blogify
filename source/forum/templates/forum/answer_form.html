@@ -1,0 +1,40 @@
+{% extends "posts/base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}Answers{% endblock %}
+
+{% block header-image %}{% static 'posts/img/home-bg.jpg' %}{% endblock %}
+
+{% block heading %}
+	<div class="site-heading">
+    <h1>Submit your answer here</h1>
+	</div>
+{% endblock %}
+
+{% block navbar %}
+    <li class="nav-item">
+      <a class="nav-link page-scroll" href="{% url 'forum:questionAdd'  %}">Ask</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+<div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+    <h1>{{ question.question }}</h1><br>
+    <form action="" method="post" class="qform" role="form">
+        {% csrf_token %}
+        {% include 'forum/form_template.html' %}
+        <br>
+        <input class="btn btn-primary" type="submit" name="submit" value="Submit">
+    </form>
+</div>
+</div>
+</div>
+
+<script>
+  $('li.active').removeClass('active');
+  $('#forum-tab').addClass('active');
+</script>
+{% endblock %}

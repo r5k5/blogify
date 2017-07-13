@@ -52,8 +52,9 @@
                     <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-xl">Register</a>
                 {% endif %}
                 {% if user.is_authenticated %}
-                    <a href="{% url 'posts:list' %}" class="btn btn-primary btn-xl">Feed</a>
-                    <a href="#" class="btn btn-primary btn-xl">Forum</a>
+                    <a href="{% url 'posts:list' %}" class="btn btn-primary btn-xl">Feed</a>                    
+                    <a href="{% url 'accounts:dashboard' %}" class="btn btn-primary btn-xl">Dashboard</a>  
+                    <a href="{% url 'forum:index' %}" class="btn btn-primary btn-xl">Forum</a>
                 {% endif %}
             </div>
         </div>
@@ -87,7 +88,7 @@
                     <div class="service-box">
                         <i class="fa fa-4x fa-diamond text-primary sr-icons"></i>
                         <h3>Blogs</h3>
-                        <p class="text-muted">Anyone can share his or her own ideas.</p>
+                        <p class="text-muted">Share your own ideas.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
@@ -166,7 +167,7 @@
                 </div>
                 <div class="col-lg-4 text-center">
                     <i class="fa fa-envelope-o fa-3x sr-contact"></i>
-                    <p><a href="mailto:your-email@your-domain.com">abc@ayx.com</a></p>
+                    <p><a href="mailto:your-email@your-domain.com">abc@xyz.com</a></p>
                 </div>
             </div>
         </div>

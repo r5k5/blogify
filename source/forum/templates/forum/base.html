@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-with, initial-scale=1, user-scalable=no">
+  <title>{% block title %}{% endblock %}</title>
+  {% load static %}
+  <!-- bootstrap.min -->
+  <link rel="stylesheet" href="{% static 'posts/css/bootstrap.min.css' %}">
+  <!--<link rel="stylesheet" href="{% static 'forum/css/mine.css' %}">-->
+  <link rel="stylesheet" href="{% static 'forum/css/clean-blog.min.css' %}">
+  <link rel="icon" href="{% static 'forum/img/logo.png' %}">
+
+  <script src="{% static 'forum/js/jquery.min.js' %}"></script>
+  {% block head %}
+  {% endblock %}
+</head>
+
+<body>
+
+  <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav">
+    <div class="container">
+      <div class="navbar-header">
+          <a class="navbar-brand page-scroll" href="{% url 'accounts:home_page' %}">BLOGIFY</a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          {% block navbar %}{% endblock %}
+          <li class="nav-item">
+              <a class="nav-link page-scroll" href="{% url 'posts:list' %}">Feed</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link page-scroll" href="{% url 'forum:index' %}">Forum</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="{% url 'accounts:dashboard' %}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link page-scroll" href="{% url 'accounts:logout' %}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  {% block content %}
+  {% endblock %}
+
+  <!-- Footer -->
+  <footer style="background-color: black;">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                  <ul class="list-inline text-center">
+                      <li class="list-inline-item">
+                          <a href="https://twitter.com/" target="_blank">
+                              <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                              </span>
+                          </a>
+                      </li>
+                      <li class="list-inline-item">
+                          <a href="https://www.facebook.com/" target="_blank">
+                              <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                              </span>
+                          </a>
+                      </li>
+                      <li class="list-inline-item">
+                          <a href="https://github.com/" target="_blank">
+                              <span class="fa-stack fa-lg">
+                                  <i class="fa fa-circle fa-stack-2x"></i>
+                                  <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                              </span>
+                          </a>
+                      </li>
+                  </ul>
+                  <p class="copyright text-muted">Copyright &copy; BLOGIFY</p>
+              </div>
+          </div>
+      </div>
+  </footer>
+
+  <script src="{% static 'forum/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

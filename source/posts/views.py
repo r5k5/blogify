@@ -32,6 +32,7 @@ def post_detail(request, id=None):
 		"content_type": ContentType.objects.get_for_model(instance.__class__),
 		"object_id": instance.id,
 	}
+	
 	form = CommentForm(request.POST or None, initial=initial_data)
 	if form.is_valid() and request.user.is_authenticated():
 		c_type = form.cleaned_data.get("content_type")
@@ -61,6 +62,7 @@ def post_detail(request, id=None):
 		"post": instance,
 		"comments": queryset,
 		"comment_form": form,
+		"authenticated_user": request.user,
 	}
 	return render(request, "posts/post_detail.html", context)
 
@@ -98,10 +100,11 @@ def post_update(request, id=None):
 	if not request.user.is_authenticated():
 		return redirect("accounts:login")
 	instance = get_object_or_404(Post, id=id)
+
+	if instance.user != request.user :
+		return redirect("posts:detail", instance.id)
+
 	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
-	
-	if instance.user != request.user:
-		return render(request, "posts/permission.html", {})
 
 	if form.is_valid():
 		instance = form.save(commit=False)
@@ -119,9 +122,9 @@ def post_delete(request, id=None):
 	if not request.user.is_authenticated():
 		return redirect("accounts:login")
 	instance = get_object_or_404(Post, id=id)
-	
-	if instance.user != request.user:
-		return render(request, "posts/permission.html", {})
+
+	if instance.user != request.user :
+		return redirect("posts:detail", instance.id)
 	
 	instance.delete()
 	return redirect("posts:list")

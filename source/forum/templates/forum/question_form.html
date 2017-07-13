@@ -1,0 +1,34 @@
+{% extends "posts/base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}Question{% endblock %}
+
+{% block header-image %}{% static 'forum/img/glass_board.png' %}{% endblock %}
+
+{% block heading %}
+	<div class="site-heading">
+    <h1>Ask your question here</h1>
+	</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<div class="row">
+<div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+    <h1>Ask Question</h1><br>
+    <form action="" method="post" class="qform" role="form">
+        {% csrf_token %}
+        {% include 'forum/form_template.html' %}
+        <br>
+        <input class="btn btn-primary" type="submit" name="submit" value="Ask">
+    </form>
+</div>
+</div>
+</div>
+
+<script>
+  $('li.active').removeClass('active');
+  $('#forum-tab').addClass('active');
+</script>
+{%endblock %}

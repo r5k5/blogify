@@ -1,0 +1,57 @@
+{% extends "posts/base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}forum{% endblock %}
+
+{% block header-image %}{% static 'forum/img/1234.jpg' %}{% endblock %}
+
+{% block navbar %}
+    <li class="nav-item">
+      <a class="nav-link page-scroll" href="{% url 'forum:questionAdd'  %}">Ask</a>
+    </li>
+{% endblock %}
+
+{% block heading %}
+	<div class="site-heading">
+	    <h1>Forum</h1>
+	    <span class="meta">No messing around just forums. The only forum for Enthusiast!!</span>
+	</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+{% if all_ques %}
+<div class="row">
+<div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+
+	{% for question in all_ques %}
+		<div class="post-preview">
+            <a href="{% url 'forum:detail' question.id %}">
+                <h2 class="post-title">
+                  {{ question.question }}
+                      <small><span class="fa fa-external-link"></span></small>
+                </h2>
+            </a>
+            <p class="post-meta">Posted by <a href="#">{% if question.userID.username %}{{ question.userID.username }}{% endif %}</a> on {{ question.date }}</p>
+    </div>
+    <hr>
+	{% endfor %}
+
+  {% else %}
+  <div class="alert alert-danger" role="alert">
+      No articles found!
+  </div>
+  {% endif %}
+
+</div>
+</div>
+</div>
+
+<script>
+  $('li.active').removeClass('active');
+  $('#forum-tab').addClass('active');
+</script>
+
+{% endblock %}
