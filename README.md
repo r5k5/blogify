@@ -1,2 +1,2 @@
 # Blogify
-Blogging Engine
+Blogging Website
